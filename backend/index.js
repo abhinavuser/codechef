@@ -1,62 +1,57 @@
 const express = require('express');
+const cheerio = require('cheerio');
 const bodyParser = require('body-parser');
-const { JSDOM } = require('jsdom');
+const axios = require('axios');
+require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json());
 
-// Endpoint to generate HTML based on a theme
+// Function to integrate content into template
+function integrateContent(templateHtml, contentText) {
+    const $ = cheerio.load(templateHtml);
+    $('#content').text(contentText); // Assuming a <div id="content"></div> placeholder
+    return $.html();
+}
+
+// Function to modify existing HTML
+function modifyHtml(htmlCode, instructions) {
+    const $ = cheerio.load(htmlCode);
+
+    // Example: Parse instructions like "change title to 'New Title'"
+    if (instructions.includes("change title to")) {
+        const newTitle = instructions.split("change title to ")[1].trim();
+        $('title').text(newTitle);
+    }
+
+    return $.html();
+}
+
+// Endpoint to generate HTML from template and content
 app.post('/generate', (req, res) => {
-    const { themeHtml, content } = req.body;
+    const { template, content } = req.body;
 
-    if (!themeHtml || !content) {
-        return res.status(400).json({ error: 'Both themeHtml and content are required.' });
+    if (!template || !content) {
+        return res.status(400).json({ error: "Template or content missing" });
     }
 
-    const dom = new JSDOM(themeHtml);
-    const document = dom.window.document;
-
-    const contentContainer = document.querySelector('#content');
-    if (contentContainer) {
-        contentContainer.innerHTML = content;
-    } else {
-        return res.status(400).json({ error: 'Theme HTML must contain an element with id "content".' });
-    }
-
-    res.status(200).send(dom.serialize());
+    const resultHtml = integrateContent(template, content);
+    res.json({ result: resultHtml });
 });
 
-// Endpoint to modify existing HTML based on user instructions
+// Endpoint to modify existing HTML based on instructions
 app.post('/modify', (req, res) => {
-    const { htmlCode, instructions } = req.body;
+    const { html_code, instructions } = req.body;
 
-    if (!htmlCode || !instructions) {
-        return res.status(400).json({ error: 'Both htmlCode and instructions are required.' });
+    if (!html_code || !instructions) {
+        return res.status(400).json({ error: "HTML code or instructions missing" });
     }
 
-    const dom = new JSDOM(htmlCode);
-    const document = dom.window.document;
-
-    instructions.forEach(instruction => {
-        const { selector, action, value } = instruction;
-        const element = document.querySelector(selector);
-
-        if (element) {
-            if (action === 'updateText') {
-                element.textContent = value;
-            } else if (action === 'updateHtml') {
-                element.innerHTML = value;
-            } else if (action === 'addClass') {
-                element.classList.add(value);
-            }
-            // Add more actions as needed
-        }
-    });
-
-    res.status(200).send(dom.serialize());
+    const resultHtml = modifyHtml(html_code, instructions);
+    res.json({ result: resultHtml });
 });
 
-// Start the server
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
