@@ -1,26 +1,23 @@
-const express = require('express');
-const cheerio = require('cheerio');
-const bodyParser = require('body-parser');
-const axios = require('axios');
-require('dotenv').config();
-
+import express from 'express';
+import * as cheerio from 'cheerio';
+import bodyParser from 'body-parser';
+import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-// Function to integrate content into template
 function integrateContent(templateHtml, contentText) {
     const $ = cheerio.load(templateHtml);
-    $('#content').text(contentText); // Assuming a <div id="content"></div> placeholder
+    $('#content').text(contentText); 
     return $.html();
 }
 
-// Function to modify existing HTML
 function modifyHtml(htmlCode, instructions) {
     const $ = cheerio.load(htmlCode);
 
-    // Example: Parse instructions like "change title to 'New Title'"
     if (instructions.includes("change title to")) {
         const newTitle = instructions.split("change title to ")[1].trim();
         $('title').text(newTitle);
@@ -29,7 +26,6 @@ function modifyHtml(htmlCode, instructions) {
     return $.html();
 }
 
-// Function to call Gemini API
 async function callGeminiApi(data, endpoint) {
     try {
         const response = await axios.post(`https://api.gemini.com/v1/${endpoint}`, data, {
@@ -45,7 +41,6 @@ async function callGeminiApi(data, endpoint) {
     }
 }
 
-// Endpoint to generate HTML from template and content using Gemini API
 app.post('/generate', async (req, res) => {
     const { template, content } = req.body;
 
@@ -55,8 +50,6 @@ app.post('/generate', async (req, res) => {
 
     try {
         const resultHtml = integrateContent(template, content);
-        // Call Gemini API if needed, for example, to perform further processing:
-        // const geminiResult = await callGeminiApi({ template, content }, 'generate-endpoint');
 
         res.json({ result: resultHtml });
     } catch (error) {
@@ -64,7 +57,6 @@ app.post('/generate', async (req, res) => {
     }
 });
 
-// Endpoint to modify existing HTML based on instructions using Gemini API
 app.post('/modify', async (req, res) => {
     const { html_code, instructions } = req.body;
 
@@ -74,8 +66,6 @@ app.post('/modify', async (req, res) => {
 
     try {
         const resultHtml = modifyHtml(html_code, instructions);
-        // Call Gemini API if needed, for example, to perform further processing:
-        // const geminiResult = await callGeminiApi({ html_code, instructions }, 'modify-endpoint');
 
         res.json({ result: resultHtml });
     } catch (error) {
