@@ -1,0 +1,159 @@
+/* General styles */
+body {
+  font-family: Inter;
+  background: rgba(231, 240, 254, 1);
+}
+
+.leaderboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  margin-top: -120px;
+  margin-left: -520px;
+  margin-right: -520px;
+}
+
+.back-icon, .menu-icon {
+  font-size: 45px;
+  cursor: pointer;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  background: #FFFFFF;
+  border-radius: 14px;
+  height: 50px;
+  width: 400px;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  border-bottom: 3px solid #3B5987;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+/* Top 3 styles */
+.top3-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 50px;
+  margin-left: -200px;
+  color: #FFFFFF;
+}
+
+.rank-1 {
+  width: 200px;
+  height: 200px;
+  margin-top: -50px;
+  background: #3B5987;
+  border: 2.25px solid #FFFFFF;
+  border-radius: 40px 40px 0 0;
+  z-index: 2; /* Make it appear above rank-2 and rank-3 */
+  text-align: center;
+  padding: 10px;
+  margin-left: calc(50% - 100px);
+  position: relative; /* To position the crown */
+}
+
+.rank-2 {
+  width: 150px;
+  height: 150px;
+  background: #3B5987;
+  border: 2.25px solid #FFFFFF;
+  border-radius: 20px 0 0 20px;
+  text-align: center;
+  padding: 10px;
+  position: absolute;
+  right: calc(50% + 100px);
+}
+
+.rank-3 {
+  width: 150px;
+  height: 150px;
+  background: #3B5987;
+  border: 2.25px solid #FFFFFF;
+  border-radius: 0 20px 20px 0;
+  text-align: center;
+  padding: 10px;
+  position: absolute;
+  left: calc(50% + 60px);
+}
+
+.top3-card .profile-pic img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-top: -40px;
+}
+
+.crown-icon {
+  position: absolute;
+  top: -20px;
+  left: calc(50% - 20px);
+  font-size: 30px;
+}
+
+/* Users List */
+.users-list {
+  background-color: #3a5a99;
+  border-radius: 20px;
+  padding: 20px;
+  width: 400px;
+  margin-right: -400px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  color: #fff;
+  border-bottom: 1px solid #fff; /* Add a line between users */
+}
+
+.rank-circle {
+  background-color: #3a5a99;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .top3-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .rank-1, .rank-2, .rank-3 {
+    position: static;
+    margin: 10px auto; /* Stack them vertically on smaller screens */
+  }
+}
