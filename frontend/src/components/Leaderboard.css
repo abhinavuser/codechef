@@ -1,4 +1,4 @@
-/* General styles */
+
 body {
   font-family: Inter;
   background: rgba(231, 240, 254, 1);
@@ -51,7 +51,6 @@ body {
   margin-top: 40px;
 }
 
-/* Top 3 styles */
 .top3-container {
   display: flex;
   justify-content: center;
@@ -69,11 +68,11 @@ body {
   background: #3B5987;
   border: 2.25px solid #FFFFFF;
   border-radius: 40px 40px 0 0;
-  z-index: 2; /* Make it appear above rank-2 and rank-3 */
+  z-index: 2; 
   text-align: center;
   padding: 10px;
   margin-left: calc(50% - 100px);
-  position: relative; /* To position the crown */
+  position: relative;
 }
 
 .rank-2 {
@@ -109,14 +108,13 @@ body {
 
 .crown-icon {
   position: absolute;
-  top: -20px;
+  top: -60px;
   left: calc(50% - 20px);
   font-size: 30px;
 }
 
-/* Users List */
 .users-list {
-  background-color: #3a5a99;
+  background-color: #3B5987;;
   border-radius: 20px;
   padding: 20px;
   width: 400px;
@@ -129,7 +127,7 @@ body {
   justify-content: space-between;
   padding: 10px;
   color: #fff;
-  border-bottom: 1px solid #fff; /* Add a line between users */
+  border-bottom: 1px solid #fff; 
 }
 
 .rank-circle {
@@ -145,15 +143,114 @@ body {
   font-size: 18px;
 }
 
-/* Responsive */
+.user-name{
+  margin-left: -150px;
+}
+.user-icon {
+  font-size: 15px;
+}
+
+.user-icon.up {
+  color: green;
+}
+
+.user-icon.down {
+  color: red;
+
+}
+
 @media (max-width: 768px) {
-  .top3-container {
-    flex-direction: column;
-    align-items: center;
+  .header {
+    padding: 5px 10px;
+    margin-top: 0;
+    margin-left: -25px;
+    margin-right: -25px;
   }
-  
-  .rank-1, .rank-2, .rank-3 {
-    position: static;
-    margin: 10px auto; /* Stack them vertically on smaller screens */
+
+  .back-icon, .menu-icon {
+    font-size: 30px; 
+  }
+
+  .tabs {
+    width: 100%; 
+    height: 40px; 
+  }
+
+  .tab {
+    padding: 5px 10px;
+  }
+
+  .main-content {
+    flex-direction: column;
+    margin-top: 0; 
+    padding: 0;
+  }
+
+  .top3-container {
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px 0 10px; 
+    position: relative; 
+  }
+
+  .rank-1 {
+    width: 160px;
+    height: 160px;
+    margin: 0; 
+    border-radius: 40px 40px 0 0;
+  }
+
+  .rank-2 {
+    width: 130px;
+    height: 130px;
+    border-radius: 20px 0 0 20px;
+    left: -30px; 
+  }
+
+  .rank-3 {
+    width: 130px;
+    height: 130px;
+    border-radius: 0 20px 20px 0;
+    right: -150px; 
+  }
+
+  .top3-card .profile-pic img {
+    width: 60px;
+    height: 60px;
+    margin-top: -30px;
+  }
+
+  .crown-icon {
+    top: -45px;
+    font-size: 25px;
+  }
+
+  .users-list {
+    width: 400px;
+    margin: 20px 0 0;
+    border-radius: 40px 40px 0 0; 
+    padding: 15px;
+  }
+
+  .user-card {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #fff; 
+  }
+
+  .rank-circle {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .user-name {
+    margin-left: 0; 
+    font-size: 16px;
+  }
+
+  .user-icon {
+    font-size: 18px; 
   }
 }
