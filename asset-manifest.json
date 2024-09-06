@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/codechef/static/css/main.9fb8c903.css",
+    "main.js": "/codechef/static/js/main.728ff077.js",
+    "static/media/rank1.png": "/codechef/static/media/rank1.1aecfcc9aaca5e37f93a.png",
+    "static/media/rank2.png": "/codechef/static/media/rank2.e08ababdb330e34e1653.png",
+    "static/media/rank3.png": "/codechef/static/media/rank3.1743d9bd5becd9f30c35.png",
+    "index.html": "/codechef/index.html",
+    "main.9fb8c903.css.map": "/codechef/static/css/main.9fb8c903.css.map",
+    "main.728ff077.js.map": "/codechef/static/js/main.728ff077.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9fb8c903.css",
+    "static/js/main.728ff077.js"
+  ]
+}
